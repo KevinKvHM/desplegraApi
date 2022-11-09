@@ -17,5 +17,13 @@ body('oficina').trim().notEmpty().exists(),
 (req, res, next) => {
     validateResult(req, res, next)
 }
-]
-module.exports = { validateCreate }
+];
+
+const validateLogin=[
+    body('password').trim().notEmpty().exists(),
+    body('email').trim().isEmail().normalizeEmail(),
+    (req, res, next) => {
+        validateResult(req, res, next)
+    }
+];
+module.exports = { validateCreate, validateLogin }

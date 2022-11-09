@@ -8,6 +8,7 @@ module.exports = {
     host: "127.0.0.1",
     port: 5432,
     dialect: "postgres",
+    
   },
   production: {
     database: process.env.DB_NAME,
@@ -15,7 +16,9 @@ module.exports = {
     password: process.env.DB_PASSWORD,
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
-      dialect: "postgres"
+      dialect: "postgres",
+      //currentDate:`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}.${date.getHours()}.${date.getMinutes()}`,
+      //fileName: `database-export-${currentDate}.tar`,
   }
   //Cambios
 };

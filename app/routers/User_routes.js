@@ -4,9 +4,10 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 const validate = require('../middleware/validateUser');
-const { validateCreate } = require('../validator/UserValidator');
+const { validateCreate,validateLogin } = require('../validator/UserValidator');
 //controller
 const UserController = require('../controllers/User_controller');
+const {respaldar,RImportar} = require('../controllers/db_migrates_controller');
 
 // Home
 //router.get('/', (req, res) => res.json({ foo: "bar" }))
@@ -20,12 +21,12 @@ router.get('/api/users/employee',auth.validateToken,validate.isAdmin,UserControl
 router.get('/api/users/roles',auth.validateToken,validate.isAdmin,UserController.allUserRole);
 router.get('/api/user-data/:id',auth.validateToken,validate.isAdmin,UserController.getUser);
 
-router.post('/api/users/signin', UserController.SignIn);
+router.post('/api/users/signin',validateLogin,UserController.SignIn);
 router.post('/api/users/logout', UserController.logout);
 router.post('/api/users/signup',validateCreate,validate.checkExisted,UserController.createCou);
 
 router.post('/api/users/update/:id',auth.validateToken, UserController.updateUser);
 router.delete('/api/users/delete/:id',auth.validateToken,validate.isAdmin,UserController.deleteUser);
 //saber que modificacion puede hacer el usuario normal y el usuario admin
-
+router.get('/api/users/dowland',respaldar);
 module.exports = router;

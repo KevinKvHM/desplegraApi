@@ -23,4 +23,4 @@ body('telefono').trim().notEmpty(),
     validateResult(req, res, next)
 }
 ]
-module.exports = { validateCreateSchool }
+module.exports = { validateCreateSchool}

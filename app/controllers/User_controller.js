@@ -13,7 +13,19 @@ await db.user.findOne({
     where: {
         email: email
     },
-    include: [ 'role']
+    include: [{
+        all: true 
+        /*
+        include: ['role'],
+        include: ['employee']
+        */
+    }]
+    /*include: [{
+        association: db.school.associations.director,
+        include: [ 'supervisor' ],
+        
+      }]*/
+    //include: [ 'role']
 }).then(user => {
 
     if (!user) {
@@ -98,7 +110,7 @@ async allUserRole(req, res) {
 //trae todos los usuarios
 async allUsers(req, res) {
 let user = await db.user.findAll()
-res.json(user) 
+res.json({users: user}) 
 },
 //Usuario + sus datos como empleado
 async allUserEmpleado(req, res) {
