@@ -7,7 +7,7 @@ const validate = require('../middleware/validateUser');
 const { validateCreate,validateLogin } = require('../validator/UserValidator');
 //controller
 const UserController = require('../controllers/User_controller');
-const {respaldar,RImportar} = require('../controllers/db_migrates_controller');
+const {respaldar,fileJsonData, allEmpleadoUser} = require('../controllers/db_migrates_controller');
 
 // Home
 //router.get('/', (req, res) => res.json({ foo: "bar" }))
@@ -28,5 +28,5 @@ router.post('/api/users/signup',validateCreate,validate.checkExisted,UserControl
 router.post('/api/users/update/:id',auth.validateToken, UserController.updateUser);
 router.delete('/api/users/delete/:id',auth.validateToken,validate.isAdmin,UserController.deleteUser);
 //saber que modificacion puede hacer el usuario normal y el usuario admin
-router.get('/api/users/dowland',respaldar);
+router.get('/api/users/dowland',fileJsonData);
 module.exports = router;

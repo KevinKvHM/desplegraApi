@@ -1,5 +1,8 @@
 const { execute } = require('@getvim/execute');
 const {exec, spawn} = require('child_process');
+const { writeFile,readFile } = require('fs');
+const efe = require('../models/index');
+const db = require('../models');
 require('dotenv').config();
 //const backup = require('../backups');
 const username = process.env.DB_USER;
@@ -13,12 +16,40 @@ const date = new Date();
 //const fileName = 'C:\Users\yo\Desktop\SQLITE3-DATABASES\bdpostres\pruebaDescarga'+currentDate+'.sql';
 
 module.exports = {
+  
+  async fileJsonData(req, res) {
+    let fileusers = await db.user.findAll({
+        include: [ 'role' ]
+    });
+    let files = await db.role.findAll({ 
+      include: ['user']
+  });
+  let obj = {getUsers:fileusers, getRoles:files}
+  /*const file = writeFile(fileusers, 'utf-8');
+  const json = JSON.parse(file)*/
+  //Genera un archivo json con un array de la consulta
+
+   /*
+   //Genera un archivo json con un array de la consulta
+   const file = writeFile('./filedata-getUsers.json', JSON.stringify(obj),'utf8',(err) => { 
+      if (err) throw err; 
+      console.log('The file has been saved!'); 
+    }); */
+  
+  /*
+  const jsonData = JSON.parse(JSON.stringify(fileusers));
+  console.log("jsonData", jsonData);
+  */    
+  res.json(obj) 
+
+  },
+
   async respaldar(req,res){
     
       //const ejecutar1 = exec(`C:/programFiles/postgreSQL/14/bin/pg_dump.exe`);
       const ejec = exec(`pg_dump -U ${username} ${database}>generasql.sql`);
         console.log("finito");
-        //res.json(ejec);
+        res.json(ejec);
   },
   async newMetodo(req, res){
 

@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       claveLocOfi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       municipioId:{
         type: Sequelize.INTEGER,

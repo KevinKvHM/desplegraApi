@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     claveLocOfi: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       unique: true
     },
     municipioId:{

@@ -66,9 +66,18 @@ async createSchool(req, res){
 async allSchool(req,res){
     try {
         let school = await db.school.findAll({
-        include: [ {
-            all: true
-        }
+           /* include: [{
+                association: db.school.associations.director,
+                include: [ 'supervisor' ],
+                
+              }]*/
+        include: [
+            'usuario','localidad',{
+                association: db.school.associations.director,
+                include: [ 'supervisor' ]
+
+            }
+            
             //'usuario'
          ]
     })
@@ -88,9 +97,10 @@ try {
 
     const school = await db.school.findOne({
         where: {id},
-        include: [{
-            all: true
-        }]
+        
+        include: ['usuario','localidad',{
+            association: db.school.associations.director,
+            include: [ 'supervisor' ]}]
     });
 
     if(!school){
