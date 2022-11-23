@@ -27,7 +27,8 @@ async createSchool(req, res){
         localidadId,
         createdAt: new Date(),
         updatedAt: new Date(),
-        userId: iduser.id,
+        //Descomentar cuando se añada el token en el body
+        //userId: iduser.id,
         director: {
             name: name_director,
             sindicato,
