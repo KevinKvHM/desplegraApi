@@ -25,7 +25,7 @@ router.post('/api/users/signin',validateLogin,UserController.SignIn);
 router.post('/api/users/logout', UserController.logout);
 router.post('/api/users/signup',validateCreate,validate.checkExisted,UserController.createCou);
 
-router.post('/api/users/update/:id',auth.validateToken, UserController.updateUser);
+router.post('/api/users/update/:id', UserController.updateUser);
 router.delete('/api/users/delete/:id',auth.validateToken,validate.isAdmin,UserController.deleteUser);
 //saber que modificacion puede hacer el usuario normal y el usuario admin
 router.get('/api/users/dowland',fileJsonData);
